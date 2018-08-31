@@ -79,13 +79,31 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     print(error)
                 } else {
                     if let placemark = placemarks?[0]{
+                       /* if placemark.administrativeArea != nil {
+                         title += placemark.administrativeArea! + ", "
+                         }
+                        if placemark.country != nil {
+                            title += placemark.country! + " "
+                        }*/
+                        
                         if placemark.subThoroughfare != nil {
                             
                             title += placemark.subThoroughfare! + " "
                         }
                         if placemark.thoroughfare != nil {
-                            title += placemark.thoroughfare!
+                            title += placemark.thoroughfare! + " "
                         }
+                        if placemark.locality != nil {
+                            title += placemark.locality! + ", "
+                        }
+                        if placemark.administrativeArea != nil {
+                            title += placemark.administrativeArea! + " "
+                        }
+                        if placemark.postalCode != nil {
+                            title += placemark.postalCode!
+                        }
+                        
+                        
                     }
                 }
                 
