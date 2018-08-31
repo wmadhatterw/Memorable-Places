@@ -19,10 +19,27 @@ class PlacesViewController: UITableViewController {
         super.viewDidLoad()
         
     }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+        
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete{
+            places.remove(at: indexPath.row)
+            UserDefaults.standard.set(places, forKey: "places")
+            table.reloadData()
+        }
+        
+    }
     override func viewDidAppear(_ animated: Bool) {
+        if let tempPlaces = UserDefaults.standard.object(forKey: "places") as? [Dictionary<String, String>]{
+            places = tempPlaces
+        }
         if places.count == 1 && places[0].count == 0 {
             places.remove(at: 0)
             places.append(["name": "Ticket Solutions", "lat": "38.928345", "lon": "-94.699830"])
+            UserDefaults.standard.set(places, forKey: "places")
         }
         activePlace = -1
         
